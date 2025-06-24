@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .slider-container{
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 3);
+        }
+        .slides {
+            display:flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide{
+            min-width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        .btn{
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%);
+            background:rgba(255, 255, 255, 0.7) ;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+        }
+        .btn:hover{
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .prev{
+            left: 10px;
+        }
+        .next{
+            right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slides" id="slides"></div>
+        <buttom class="btn prev" onclick="prevSlide()">&lt;</buttom>
+        <button class="btn next" onclick="nextSlide()">&gt;</button>
+    </div>
+    <script>
+        const imageurls=[
+           "https://picsum.photos/id/1015/800/400",
+            "https://picsum.photos/id/1016/800/400",
+            "https://picsum.photos/id/1018/800/400",
+            "https://picsum.photos/id/1020/800/400"
+        ];
+        const slideContainer=document.getElementById("slides");
+
+        imageurls.forEach(url=>{
+            const slide=document.createElement("div");
+            slide.className="slide";
+            slide.style.backgroundImage=`url('${url}')`;
+            slideContainer.appendChild(slide);
+        });
+        const totalSlides=imageurls.length;
+        let currentIndex=0;
+
+        function updateSlidePosition(){
+            slideContainer.style.transform=`translateX(-${currentIndex* 100}%)`;
+        }
+        function nextSlide(){
+            currentIndex=(currentIndex+1)%totalSlides;
+            updateSlidePosition();
+        }
+        function prevSlide(){
+            currentIndex=(currentIndex-1+ totalSlides)%totalSlides;
+            updateSlidePosition();
+        }
+        setInterval(nextSlide,4000);
+
+    </script>
+</body>
+</html>
