@@ -1,94 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slider</title>
-    <style>
-        body{
-            margin: 0;
-            font-family: sans-serif;
-        }
-        .slider-container{
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 40px auto;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 3);
-        }
-        .slides {
-            display:flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .slide{
-            min-width: 100%;
-            height: 400px;
-            background-size: cover;
-            background-position: center;
-        }
-        .btn{
-            position: absolute;
-            top: 50%;
-            transform: translate(-50%);
-            background:rgba(255, 255, 255, 0.7) ;
-            border: none;
-            padding: 10px 15px;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 10;
-            border-radius: 50%;
-        }
-        .btn:hover{
-            background: rgba(255, 255, 255, 0.9);
-        }
-        .prev{
-            left: 10px;
-        }
-        .next{
-            right: 10px;
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lax Travel Agency Limited - Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="slider-container">
-        <div class="slides" id="slides"></div>
-        <buttom class="btn prev" onclick="prevSlide()">&lt;</buttom>
-        <button class="btn next" onclick="nextSlide()">&gt;</button>
+  <header>
+    <div class="container">
+      <h1>Lax Travel Agency Limited</h1>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="services.html">Services</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
-    <script>
-        const imageurls=[
-           "https://picsum.photos/id/1015/800/400",
-            "https://picsum.photos/id/1016/800/400",
-            "https://picsum.photos/id/1018/800/400",
-            "https://picsum.photos/id/1020/800/400"
-        ];
-        const slideContainer=document.getElementById("slides");
+  </header>
 
-        imageurls.forEach(url=>{
-            const slide=document.createElement("div");
-            slide.className="slide";
-            slide.style.backgroundImage=`url('${url}')`;
-            slideContainer.appendChild(slide);
-        });
-        const totalSlides=imageurls.length;
-        let currentIndex=0;
+  <section class="slider">
+    <div class="slides">
+      <img src="thumb.jpeg" alt="Nepal Mountains" class="slide active" height="300px" />
+      <img src="WhatsApp Image 2025-08-11 at 02.57.09_f4502003.jpg" alt="Trekking Nepal" class="slide" height="300px" />
+      <img src="5817b46fb28a641b008b5fbb.webp" alt="Nepali Culture" class="slide" height="300px" /> 
+      <img src="WhatsApp Image river2025-08-11 at 02.57.10_536873e7.jpg" alt="Nepali scenario" class="slide" height="300px" /> 
+      <img src="WhatsApp Image toran2025-08-11 at 03.24.14_bb58c917.jpg" alt="beoutiful toran" class="slide" height="300px" /> 
+      <img src="WhatsApp Image pokhari2025-08-11 at 02.57.09_1a0aa492.jpg" alt="wonderful lake" class="slide" height="100px" /> 
+      <img src="20230505124035image-badimalika-1-1.jpg" alt="Nepali Culture" class="slide" height="300px" />
+      <img src="WhatsApp view image2025-08-11 at 03.24.13_9649f6db.jpg" alt="Nepali Culture" class="slide" height="300px" /> 
+      <img src="WhatsApp Image evening 2025-08-11 at 03.24.16_5a9000d3.jpg" alt="evening view" class="slide" height="300px" /> 
+      <img src="WhatsApp Image mountain 2025-08-11 at 03.24.14_626c25dc.jpg" alt="Nepali Culture" class="slide" height="300px" /> 
+      <img src="WhatsApp view image2025-08-11 at 03.24.13_9649f6db.jpg" alt="stunning view" class="slide" height="300px" /> 
+      <img src="WhatsApp Image wow2025-08-11 at 03.24.16_2266eb81.jpg" alt="greenary" class="slide" height="300px" /> 
+      
+      
+      
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </section>
 
-        function updateSlidePosition(){
-            slideContainer.style.transform=`translateX(-${currentIndex* 100}%)`;
-        }
-        function nextSlide(){
-            currentIndex=(currentIndex+1)%totalSlides;
-            updateSlidePosition();
-        }
-        function prevSlide(){
-            currentIndex=(currentIndex-1+ totalSlides)%totalSlides;
-            updateSlidePosition();
-        }
-        setInterval(nextSlide,4000);
+  <section class="intro container">
+    <h2>Explore Nepal with Lax Travel Agency</h2>
+    <p>Your gateway to breathtaking treks, rich culture, and unforgettable adventures in Nepal. Join us and experience the journey of a lifetime and make precious memory</p>
+  </section>
 
-    </script>
+  <footer>
+    <p>© 2025 Lax Travel Agency Limited. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

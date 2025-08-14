@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact & Booking - Lax Travel Agency Limited</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1.1rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #3498db;
+    }
+
+    .contact {
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .contact h2 {
+      margin-bottom: 2rem;
+      color: #2c3e50;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    #formMessage {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    #formMessage.success {
+      color: #27ae60;
+    }
+
+    #formMessage.error {
+      color: #c0392b;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Lax Travel Agency Limited</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container contact">
+    <h2>Contact & Booking Form</h2>
+    <form id="bookingForm" novalidate>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required /><br><br>
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required /><br><br>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,15}" placeholder="Digits only" /><br><br>
+
+      <label for="destination">Select Destination:</label>
+      <select id="destination" name="destination" required>
+        <option value="">--Choose an option--</option>
+        <option value="everest">Everest Base Camp</option>
+        <option value="annapurna">Annapurna Circuit</option>
+        <option value="mustang">Mustang</option>
+        <option value="langtang">Langtang Valley</option>
+        <option value="jomsom">Jomsom Muktinath</option>
+        <option value="pokhara">Pokhara</option>
+      </select><br><br>
+
+      <label for="message">Additional Message:</label>
+      <textarea id="message" name="message" rows="4"></textarea><br><br>
+
+      <button type="submit">Submit Booking</button>
+    </form>
+    <div id="formMessage"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 Lax Travel Agency Limited. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const destination = document.getElementById('destination').value;
+      const message = document.getElementById('message').value.trim();
+      const formMessage = document.getElementById('formMessage');
+
+      // Basic validation
+      if (!name || !email || !phone || !destination) {
+        formMessage.textContent = 'Please fill out all required fields.';
+        formMessage.className = 'error';
+        return;
+      }
+
+      if (!/^[0-9]{10,15}$/.test(phone)) {
+        formMessage.textContent = 'Please enter a valid phone number (10-15 digits).';
+        formMessage.className = 'error';
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        formMessage.textContent = 'Please enter a valid email address.';
+        formMessage.className = 'error';
+        return;
+      }
+
+      // If validation passes, show success message
+      formMessage.textContent = 'Booking submitted successfully! We will contact you soon.';
+      formMessage.className = 'success';
+
+      // Show popup alert
+      alert('Thank you, ' + name + '! Your booking for ' + destination + ' has been submitted successfully.');
+
+      // Reset form
+      this.reset();
+    });
+  </script>
+</body>
+</html>
