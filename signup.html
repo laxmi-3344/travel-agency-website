@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up - Lax Travel Agency Limited</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Lax Travel Agency Limited</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="destinations.html">Destinations</a>
+                <a href="testimonials.html">Testimonials</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html" class="active">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container page-content">
+        <h2>Sign Up</h2>
+        <div class="contact-form">
+            <div class="contact-intro">
+                <p>Create your account to get started with Lax Travel Agency Limited.</p>
+            </div>
+            <form id="signupForm" onsubmit="return submitSignup(event);">
+                <div class="form-group">
+                    <label for="signup-name">Name:</label>
+                    <input type="text" id="signup-name" name="name" required>
+                    <span class="error-message" id="signupNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email:</label>
+                    <input type="email" id="signup-email" name="email" required>
+                    <span class="error-message" id="signupEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password:</label>
+                    <input type="password" id="signup-password" name="password" required>
+                    <span class="error-message" id="signupPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password:</label>
+                    <input type="password" id="signup-confirm-password" name="confirm-password" required>
+                    <span class="error-message" id="signupConfirmPasswordError"></span>
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Lax Travel Agency Limited. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function validateSignup() {
+            let isValid = true;
+            document.getElementById('signupNameError').textContent = '';
+            document.getElementById('signupEmailError').textContent = '';
+            document.getElementById('signupPasswordError').textContent = '';
+            document.getElementById('signupConfirmPasswordError').textContent = '';
+            const name = document.getElementById('signup-name').value.trim();
+            if (name.length < 2) {
+                document.getElementById('signupNameError').textContent = 'Name must be at least 2 characters long';
+                isValid = false;
+            }
+            const email = document.getElementById('signup-email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('signupEmailError').textContent = 'Please enter a valid email address';
+                isValid = false;
+            }
+            const password = document.getElementById('signup-password').value;
+            // Password must be at least 7 characters, contain one uppercase, and one symbol
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{7,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('signupPasswordError').textContent = 'Password must be at least 7 characters, contain one uppercase letter, and one symbol';
+                isValid = false;
+            }
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            if (password !== confirmPassword) {
+                document.getElementById('signupConfirmPasswordError').textContent = 'Passwords do not match';
+                isValid = false;
+            }
+            return isValid;
+        }
+        function submitSignup(event) {
+            event.preventDefault();
+            if (validateSignup()) {
+                alert("You have signed up successfully!");
+                document.getElementById('signupForm').reset();
+                window.location.href = "login.html";
+            } else {
+                if (document.getElementById('signupConfirmPasswordError').textContent) {
+                    alert('Passwords do not match. Please try again.');
+                }
+            }
+            return false;
+        }
+        document.getElementById('signup-name').addEventListener('blur', function() {
+            if (this.value.trim().length < 2) {
+                document.getElementById('signupNameError').textContent = 'Name must be at least 2 characters long';
+            } else {
+                document.getElementById('signupNameError').textContent = '';
+            }
+        });
+        document.getElementById('signup-email').addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(this.value.trim())) {
+                document.getElementById('signupEmailError').textContent = 'Please enter a valid email address';
+            } else {
+                document.getElementById('signupEmailError').textContent = '';
+            }
+        });
+        document.getElementById('signup-password').addEventListener('blur', function() {
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{7,}$/;
+            if (!passwordRegex.test(this.value)) {
+                document.getElementById('signupPasswordError').textContent = 'Password must be at least 7 characters, contain one uppercase letter, and one symbol';
+            } else {
+                document.getElementById('signupPasswordError').textContent = '';
+            }
+        });
+        document.getElementById('signup-confirm-password').addEventListener('blur', function() {
+            const password = document.getElementById('signup-password').value;
+            if (this.value !== password) {
+                document.getElementById('signupConfirmPasswordError').textContent = 'Passwords do not match';
+            } else {
+                document.getElementById('signupConfirmPasswordError').textContent = '';
+            }
+        });
+    </script>
+</body>
+
+</html>
